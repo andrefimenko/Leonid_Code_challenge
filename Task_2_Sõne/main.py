@@ -3,8 +3,7 @@ sõne = "()[{}(())]"
 # sõne = "(({[]}){})"
 # sõne = "{{()[}}]abra"
 # sõne = 'abra'
-
-sõne_copy = sõne[:]
+# sõne = ""
 
 
 def show_test_result(string_brackets, result):
@@ -15,17 +14,26 @@ def show_test_result(string_brackets, result):
     print(f"The string of brackets {string_brackets} is {result}.")
 
 
-if len(sõne) % 2 != 0:
-    show_test_result(sõne, False)
+def string_decomposition(bracket_string):
+    while True:
+        if '()' in bracket_string or '[]' in bracket_string or '{}' in bracket_string:
+            for pair in ['()', '[]', '{}']:
+                bracket_string = bracket_string.replace(pair, '')
+        elif bracket_string == '':
+            show_test_result(sõne, True)
+            break
+        else:
+            show_test_result(sõne, False)
+            break
 
 
-while True:
-    if '()' in sõne_copy or '[]' in sõne_copy or '{}' in sõne_copy:
-        for pair in ['()', '[]', '{}']:
-            sõne_copy = sõne_copy.replace(pair, '')
-    elif sõne_copy == '':
-        show_test_result(sõne, True)
-        break
-    else:
+if __name__ == "__main__":
+
+    sõne_copy = sõne[:]
+
+    if not sõne:
+        print("The string is empty!!!")
+    elif len(sõne) % 2 != 0:
         show_test_result(sõne, False)
-        break
+    else:
+        string_decomposition(sõne_copy)
